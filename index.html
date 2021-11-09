@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sanitize.css">
+  <style>
+    textarea {
+      width: 30%;
+      min-height: 8em;
+      vertical-align: top;
+    }
+    iframe {
+      margin: 6px 0;
+      border: 1px solid WindowFrame;
+      width: 80%;
+      height: 50vh;
+    }
+  </style>
+</head>
+<body style="padding: 6px;">
+  <h3 style="margin: 0; padding-bottom: 6px;">mock codepen</h3>
+  <textarea placeholder="html"></textarea>
+  <textarea placeholder="js"></textarea>
+  <textarea placeholder="css"></textarea><br />
+  <iframe></iframe>
+  <script src="https://unpkg.com/@babel/standalone@7.16.2/babel.min.js"></script>
+  <script>
+    var _ = document
+    var $ = _.querySelector.bind(_)
+    var $$ = _.querySelectorAll.bind(_)
+    var inputs = $$('textarea')
+    for (let i of inputs) {
+      inputs[i.placeholder] = i
+      i.addEventListener('input', refresh)
+    }
+    var output = $('iframe')
+    var timer = 0
+    function refresh() {
+      clearTimeout(timer)
+      timer = setTimeout(do_refresh, 200)
+    }
+    var import_loop_protect = import('https://ga.jspm.io/npm:loop-protect@2.1.6/dist/index.js')
+    var registering = true
+    async function do_refresh() {
+      let loop_protect = (await import_loop_protect).default
+      if (registering) {
+        Babel.registerPlugin('loopProtection', loop_protect(100))
+        registering = false
+      }
+      let code;
+      try {
+        ({code} = Babel.transform(inputs.js.value, {
+          plugins: ['loopProtection'],
+        }))
+      } catch (err) {
+        // console.log('err', err)
+        return;
+      }
+
+      let doc = `<!DOCTYPE html><html><meta charset="UTF-8"><title>test</title>
+      <style>
+        #__error__ { border: 1px solid red; }
+        #__error__::before { background-color: red; }
+        #__console__ { border: 1px solid green; }
+        #__console__::before { background-color: green; }
+        #__error__, #__console__ {
+          line-height: 1;
+          padding-top: 16px;
+          position: relative;
+        }
+        #__error__::before, #__console__::before {
+          content: '#' attr(id);
+          position: absolute;
+          top: 0; left: 0;
+          color: white;
+        }
+      </style><style>${inputs.css.value}</style>
+      <body>${inputs.html.value}
+        <pre id="__error__" style="color: red"></pre>
+        <pre id="__console__" style="color: green"></pre>
+      <script>try{
+        var console = {
+          log(...args) { __console__.textContent = args.join(' ') },
+          debug(...args) { __console__.textContent = args.join(' ') }
+        }
+        eval(${JSON.stringify(code)})
+      } catch (err) {
+        __error__.textContent = err.stack
+      }<` + `/script>
+      </body>`;
+      output.srcdoc = doc
+    }
+  </script>
+</body>
+</html>
