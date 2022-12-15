@@ -14,7 +14,6 @@ export default async (_request: Request, _context: Context) => {
       headers: {
         "X-Access-Key": accessKey,
         "X-Bin-Meta": "false",
-        "X-JSON-Path": "value",
       },
     },
   );
@@ -23,9 +22,9 @@ export default async (_request: Request, _context: Context) => {
     return res1;
   }
 
-  const value: number = await res1.json();
+  const value = await res1.json().then((e) => e.value);
 
-  const newValue = value + 1;
+  const newValue = Number(value) + 1;
 
   const res2 = await fetch(
     "https://api.jsonbin.io/v3/b/5d1ec090beda8445769e5649",
