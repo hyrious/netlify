@@ -46,3 +46,5 @@ export default async (_request: Request, _context: Context) => {
     headers: { "Content-Type": "application/json" },
   });
 };
+
+export const config = { path: "/gonow" };
