@@ -1,0 +1,7 @@
+{
+  "name": "netlify.hyrious.me",
+  "private": true,
+  "devDependencies": {
+    "@netlify/edge-functions": "^2.10.0"
+  }
+}

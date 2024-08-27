@@ -1,4 +1,4 @@
-import type { Context } from "https://edge.netlify.com";
+import type { Context } from "@netlify/edge-functions";
 
 export default async (_request: Request, _context: Context) => {
   const accessKey = Deno.env.get("JSONBIN_GONOW_KEY");
