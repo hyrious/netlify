@@ -7,6 +7,7 @@ const Preflight: ResponseInit = {
   headers: new Headers({
     'access-control-allow-origin': '*',
     'access-control-allow-methods': 'GET,POST,PUT,PATCH,TRACE,DELETE,HEAD,OPTIONS',
+    'access-control-allow-headers': 'authorization',
     'access-control-max-age': '1728000',
   })
 }
