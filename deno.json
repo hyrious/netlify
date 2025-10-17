@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "@netlify/edge-functions": "npm:@netlify/edge-functions@^2.19.0"
+  }
+}

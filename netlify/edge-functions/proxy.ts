@@ -1,4 +1,4 @@
-import { Config, Context } from "@netlify/edge-functions";
+import type { Config, Context } from "@netlify/edge-functions";
 
 export const config: Config = { path: '/proxy/*' }
 
@@ -25,12 +25,12 @@ const whitelist = [
   'https://registry.npmmirror.com/',
 ]
 
-export default async (request: Request, context: Context) => {
+export default async (request: Request, _context: Context) => {
   if (request.method === 'OPTIONS' && request.headers.has('access-control-request-headers'))
     return new Response(null, Preflight)
 
-  let url = new URL(request.url)
-  let target_ = url.href.slice(url.origin.length + '/proxy/'.length).replace(/^https?:\/+/, 'https://')
+  const url = new URL(request.url)
+  const target_ = url.href.slice(url.origin.length + '/proxy/'.length).replace(/^https?:\/+/, 'https://')
 
   if (whitelist.some(prefix => target_.startsWith(prefix))) {
 
@@ -41,17 +41,17 @@ export default async (request: Request, context: Context) => {
       return new Response(null, NotFound)
     }
 
-    let headers = new Headers(request.headers)
+    const headers = new Headers(request.headers)
     headers.set('Host', target.host)
     headers.set('Referer', target.origin)
 
-    let response = await fetch(target, {
+    const response = await fetch(target, {
       method: request.method,
       headers: headers,
       body: request.body,
     })
 
-    let responseHeaders = new Headers(response.headers)
+    const responseHeaders = new Headers(response.headers)
     responseHeaders.set('access-control-allow-origin', '*')
     responseHeaders.set('access-control-allow-credentials', 'true')
     responseHeaders.delete('content-security-policy')
