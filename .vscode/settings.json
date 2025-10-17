@@ -1,12 +1,14 @@
 {
-  "deno.enable": true,
-  "deno.unstable": true,
-  "deno.inlayHints.enumMemberValues.enabled": false,
-  "deno.inlayHints.functionLikeReturnTypes.enabled": false,
-  "deno.inlayHints.parameterNames.enabled": "none",
-  "deno.inlayHints.parameterTypes.enabled": false,
-  "deno.inlayHints.propertyDeclarationTypes.enabled": false,
-  "deno.inlayHints.variableTypes.enabled": false,
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "denoland.vscode-deno"
+	"files.insertFinalNewline": true,
+	"files.trimTrailingWhitespace": true,
+	"editor.defaultFormatter": "denoland.vscode-deno",
+	"typescript.preferences.importModuleSpecifier": "relative",
+	"typescript.preferences.importModuleSpecifierEnding": "js",
+	"typescript.preferences.quoteStyle": "single",
+	"deno.enable": true,
+	"[typescript]": {
+		"editor.defaultFormatter": "denoland.vscode-deno",
+		"editor.formatOnSave": true,
+		"editor.insertSpaces": false
+	}
 }

@@ -1,5 +1,12 @@
 {
-  "imports": {
-    "@netlify/edge-functions": "npm:@netlify/edge-functions@^2.19.0"
-  }
+	"imports": {
+		"@netlify/edge-functions": "npm:@netlify/edge-functions@^2.19.0"
+	},
+	"fmt": {
+		"options": {
+			"useTabs": true,
+			"lineWidth": 110,
+			"singleQuote": true
+		}
+	}
 }

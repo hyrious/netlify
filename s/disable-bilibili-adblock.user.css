@@ -1,0 +1,11 @@
+/* ==UserStyle==
+@name           disable adblock tip
+@namespace      disable.bilibili.adblock.tip
+@version        1.0.0
+@description    A new userstyle
+@author         Me
+==/UserStyle== */
+
+@-moz-document domain("bilibili.com") {
+	.adblock-tips { display: none !important }
+}

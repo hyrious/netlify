@@ -1,12 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>hyrious.netlify.app</title>
-  <meta name="color-scheme" content="light dark">
-</head>
-<body>
-  <h3>Hello, world!</h3>
-</body>
+<html lang="zh-Hans">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>hyrious.netlify.app</title>
+		<style>
+			html { box-sizing: border-box; }
+			*, *:before, *:after { box-sizing: inherit; }
+			body { color: #000c; max-width: 724px; margin: 16px auto; padding: 12px; font: 18px/1.58 sans-serif; }
+			h3 { margin-bottom: .3em; }
+			p { margin-top: .6em; }
+			ul { list-style-type: square; }
+			a, ins { color: inherit; text-decoration: none; border-bottom: 2px solid; }
+			a:hover { color: #000; background: #0000001a; }
+			.mac { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", sans-serif; }
+			.windows { font-family: "Segoe WPC", "Segoe UI", "Microsoft YaHei", sans-serif; }
+			.linux { font-family: system-ui, "Ubuntu", "Droid Sans", "Source Han Sans SC", "Source Han Sans CN", "Source Han Sans", sans-serif; }
+		</style>
+	</head>
+	<body class="linux">
+		<ul>
+			<li><a href="s/disable-bilibili-adblock.user.css">隐藏 B 站顶部 adblock 提示</a></li>
+		</ul>
+		<script type="module">
+			var ua = navigator.userAgent.toLowerCase();
+			document.body.className = ua.indexOf('macintosh') >= 0 ? 'mac' : ua.indexOf('windows') >= 0 ? 'windows' : 'linux';
+		</script>
+	</body>
 </html>
